@@ -1,6 +1,7 @@
 const express = require("express");
 const { db } = require("./models");
 const playlistsRouter = require("./routes/playlists")
+const songsRouter = require("./routes/songs")
 
 const app = express(); // calling express to create the app
 app.use(express.json()); // use the json middleware to read the JSON request bodies
@@ -10,6 +11,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/playlists", playlistsRouter);
+app.use("/api/songs", songsRouter)
+
 
 db.sync().then(() => {
   app.listen(3000, () => {
