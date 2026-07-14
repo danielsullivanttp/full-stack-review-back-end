@@ -11,7 +11,9 @@ router.get("/", async (req, res) => {
 
 // GET /:id → one playlist by id (use findByPk) include songs
 router.get("/:id", async (req, res) => {
-  const playlist = await Playlist.findByPk(Number(req.params.id), { include: Song });
+  const playlist = await Playlist.findByPk(Number(req.params.id), {
+    include: Song,
+  });
   if (!playlist)
     return res.status(404).json({ error: "Playlist Not Found!!!" });
   res.status(200).json(playlist);
@@ -19,8 +21,8 @@ router.get("/:id", async (req, res) => {
 
 // POST / → create a playlist from req.body
 router.post("/", async (req, res) => {
-  const playlist = await Playlist.create(req.body);
-  res.status(201).json(playlist);
+  const newPlaylist = await Playlist.create(req.body);
+  res.status(201).json(newPlaylist);
 });
 
 // PATCH /:id → update a playlist
