@@ -5,16 +5,16 @@ const router = express.Router();
 
 // GET / → all playlists
 router.get("/", async (req, res) => {
-  const playlists = await Playlist.findAll();
-  res.json(playlists);
+  const playlists = await Playlist.findAll({ include: Song });
+  res.status(200).json(playlists);
 });
 
 // GET /:id → one playlist by id (use findByPk) include songs
 router.get("/:id", async (req, res) => {
-  const playlist = await Playlist.findByPk(req.params.id, { include: Song });
+  const playlist = await Playlist.findByPk(Number(req.params.id), { include: Song });
   if (!playlist)
     return res.status(404).json({ error: "Playlist Not Found!!!" });
-  res.json(playlist);
+  res.status(200).json(playlist);
 });
 
 // POST / → create a playlist from req.body
@@ -25,10 +25,10 @@ router.post("/", async (req, res) => {
 
 // PATCH /:id → update a playlist
 router.patch("/:id", async (req, res) => {
-  const playlist = await Playlist.findByPk(req.params.id);
+  const playlist = await Playlist.findByPk(Number(req.params.id));
   if (!playlist) return res.status(404).json({ error: "Playlist not found" });
   await playlist.update(req.body);
-  res.json(playlist);
+  res.status(200).json(playlist);
 });
 
 // DELETE a task
@@ -36,7 +36,7 @@ router.patch("/:id", async (req, res) => {
 // DELETE /:id → delete a playlist
 
 router.delete("/:id", async (req, res) => {
-  const playlist = await Playlist.findByPk(req.params.id);
+  const playlist = await Playlist.findByPk(Number(req.params.id));
   if (!playlist) return res.status(404).json({ error: "Playlist not found" });
   await playlist.destroy();
   res.sendStatus(204);

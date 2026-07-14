@@ -10,6 +10,6 @@ const Playlist = db.define("Playlist", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
+  });
 
 module.exports = Playlist;

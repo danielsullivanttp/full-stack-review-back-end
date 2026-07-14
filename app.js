@@ -2,10 +2,11 @@ const express = require("express");
 const { db } = require("./models");
 const playlistsRouter = require("./routes/playlists")
 const songsRouter = require("./routes/songs")
+const cors = require("cors");
 
 const app = express(); // calling express to create the app
 app.use(express.json()); // use the json middleware to read the JSON request bodies
-
+app.use(cors())
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
