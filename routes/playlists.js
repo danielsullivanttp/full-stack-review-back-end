@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
 
 // POST / → create a playlist from req.body
 router.post("/", async (req, res) => {
-  const newPlaylist = await Playlist.create(req.body);
+  const newPlaylist = await Playlist.Create(req.body);
   res.status(201).json(newPlaylist);
 });
 

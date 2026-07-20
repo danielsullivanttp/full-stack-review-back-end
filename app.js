@@ -14,10 +14,11 @@ app.get("/health", (req, res) => {
 app.use("/api/playlists", playlistsRouter);
 app.use("/api/songs", songsRouter)
 
+const URL = "https://full-stack-review-front-end.vercel.app/"
 
 db.sync().then(() => {
-  app.listen(process.env.PORT || 3000, () => {
+  app.listen(URL || 3000, () => {
     // open port 3000 and see if there are any HTTP requests
-    console.log("Server running on http://localhost:3000"); // console logs when the server is running
+    console.log("Server running on URL"); // console logs when the server is running
   });
 });
