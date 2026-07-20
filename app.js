@@ -14,7 +14,7 @@ app.get("/health", (req, res) => {
 app.use("/api/playlists", playlistsRouter);
 app.use("/api/songs", songsRouter)
 
-const URL = "https://full-stack-review-front-end.vercel.app/"
+const URL = "https://quotes-backend-afm2.onrender.com"
 
 db.sync().then(() => {
   app.listen(URL || 3000, () => {
